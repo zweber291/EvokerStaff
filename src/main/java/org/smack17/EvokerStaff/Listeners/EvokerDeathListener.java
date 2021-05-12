@@ -15,8 +15,10 @@ public class EvokerDeathListener implements Listener {
     }
     @EventHandler
     public void onEntityDeath(EntityDeathEvent e) {
+        //Gets location that an entity died
         Location l = e.getEntity().getLocation();
         l.setY(l.getY() + 1.0D);
+        //If evokerDrop is true in the config and the entity that died is an evoker, drop the staff
         if(config.getBoolean("evokerDrop") && e.getEntity() instanceof Evoker) {
             e.getEntity().getWorld().dropItem(l, Main.item());
         }

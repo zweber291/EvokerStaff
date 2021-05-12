@@ -14,6 +14,7 @@ public class GiveStaff implements CommandExecutor {
         if(cmd.getName().equalsIgnoreCase("givestaff"))
         {
             Player p = (Player)sender;
+            //Gives the item from Main.class to the player if they have permissions
             if(p.hasPermission("EvokerStaff.give"))
             {
                 p.getInventory().addItem(Main.item());

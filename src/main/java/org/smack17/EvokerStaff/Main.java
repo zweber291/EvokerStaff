@@ -25,30 +25,41 @@ public class Main extends JavaPlugin {
     }
 
     public void onEnable() {
+        //Enable message
         logger.info((new StringBuilder(getDescription().getName())).append(" v")
                 .append(getDescription().getVersion())
                 .append(" by ").append(getDescription().getAuthors())
                 .append(" has been enabled!").toString());
-        saveDefaultConfig();
+        saveDefaultConfig(); //Copies the config in the jar to the plugin's folder
+
+        //Register Events
         getServer().getPluginManager().registerEvents(new EvokerDeathListener(this), this);
         getServer().getPluginManager().registerEvents(new RightClickListener(), this);
+
+        //Register Commands
         getCommand("givestaff").setExecutor(new GiveStaff());
     }
 
     public void onDisable() {
+        //Disable message
         logger.info((new StringBuilder(getDescription().getName())).append(" has been disabled.").toString());
     }
 
+    //This is the item that players will receive when using the givestaff command or killing an evoker
     public static ItemStack item() {
         ItemStack i = new ItemStack(Material.DIAMOND_HOE);
         ItemMeta m = i.getItemMeta();
+
+        //Set item name
         m.setDisplayName((new StringBuilder()).append(ChatColor.GRAY).append("Evoker Staff").toString());
+
+        //Set item lore
         List lore = new ArrayList();
         lore.add((new StringBuilder()).append(ChatColor.RED).append("Used by the Evoker").toString());
         lore.add((new StringBuilder()).append(ChatColor.RED).append("to summon its fangs.").toString());
         lore.add((new StringBuilder()).append(ChatColor.GOLD).append("Left-click to use.").toString());
         m.setLore(lore);
         i.setItemMeta(m);
-        return i;
+        return i; //returns the item for use in other classes
     }
 }
